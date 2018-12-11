@@ -45,9 +45,11 @@ export default {
 	},
 	getWeekNumberOfMonth(date) {
 		let nowDate = new Date(date);
-		let lastDate = new Date(nowDate.getFullYear(), nowDate.getMonth() + 1, 0);
-		let dayOnWeek = lastDate.getDay() || 7;
+		let year = nowDate.getFullYear();
+		let month = nowDate.getMonth();
+		let firstDate = new Date(year, month, 1);
+		let lastDate = new Date(year, month+1, 0);
 		let days = lastDate.getDate();
-		return Math.ceil((days + 7 - dayOnWeek) / 7);
+		return Math.ceil((firstDate.getDay() + days + (6-lastDate.getDay())) / 7);
 	}
 };
